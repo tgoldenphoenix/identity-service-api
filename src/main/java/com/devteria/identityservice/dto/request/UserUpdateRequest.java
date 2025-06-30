@@ -3,6 +3,7 @@ package com.devteria.identityservice.dto.request;
 import java.time.LocalDate;
 
 public class UserUpdateRequest {
+    // do not update username
     private String password;
     private String firstName;
     private String lastName;
