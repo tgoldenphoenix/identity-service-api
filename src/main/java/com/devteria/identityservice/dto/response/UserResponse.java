@@ -1,4 +1,4 @@
-package com.devteria.identityservice.dto.request;
+package com.devteria.identityservice.dto.response;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -6,12 +6,13 @@ import lombok.experimental.FieldDefaults;
 import java.time.LocalDate;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserUpdateRequest {
-    // do not update username
+public class UserResponse {
+    String id;
+    String username;
     String password;
     String firstName;
     String lastName;
