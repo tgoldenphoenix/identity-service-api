@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 
 import java.time.LocalDate;
 
-@Entity
+@Entity // jpa standard annotation
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

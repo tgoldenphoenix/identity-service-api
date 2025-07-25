@@ -1,6 +1,7 @@
 server:
   port: 8080
   servlet:
+    # Each micro-service has its own path
     context-path: /identity
 
 spring:
@@ -10,5 +11,7 @@ spring:
     password: password
   jpa:
     hibernate:
+      # Hibernate create the table for me
+      # Thuc te phai tao ra script SQL cho tem dev-op tao databse
       ddl-auto: update
     show-sql: true

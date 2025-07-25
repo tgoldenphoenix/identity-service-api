@@ -7,6 +7,8 @@ import com.devteria.identityservice.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 
+// giong kieu dependency injection
+// vao target folder coi implementation cua no
 @Mapper(componentModel = "spring")
 public interface UserMapper {
     User toUser(UserCreationRequest request);

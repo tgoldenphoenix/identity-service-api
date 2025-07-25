@@ -19,10 +19,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserController {
-     UserService userService;
+    UserService userService;
 
+    // Controller's methods khong can public vi no la layer cao nhat roi
+    // Service's methods must be public
+    // Spring automatically use Jackson to convert JSON <--> java object
     @PostMapping
     ApiResponse<User> createUser(@RequestBody @Valid UserCreationRequest request){
+        // no injection
         ApiResponse<User> apiResponse = new ApiResponse<>();
 
         apiResponse.setResult(userService.createUser(request));
