@@ -1,3 +1,4 @@
+# file .yaml nay chua secret keys, khong push len github
 server:
   port: 8080
   servlet:
@@ -15,3 +16,6 @@ spring:
       # Thuc te phai tao ra script SQL cho tem dev-op tao databse
       ddl-auto: update
     show-sql: true
+
+jwt:
+  signerKey: "MDvpLDCtXfyENOq5a9edNvTeco9AyO+dwGxZWnsSJMwnU/WAzXjf4pv2B9osymAq"

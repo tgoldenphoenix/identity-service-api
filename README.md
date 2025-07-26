@@ -4,7 +4,7 @@ Spring framework
 
 ## Technologies
 
-Spring Validation
+Spring Validation, Spring Security JWT-based authentication
 
 Hibernate Object-Relational Mapping (ORM) framework 
 
@@ -21,6 +21,8 @@ Normalize API response with a custom class including: code, message and result
 Global exception handler with `@ControllerAdvice` class
 
 Hash user password with Bcrypt before saving to Database
+
+JWT-based authentication with [Nimbus JOSE + JWT](https://connect2id.com/products/nimbus-jose-jwt) library
 
 DTO classes for:
 
