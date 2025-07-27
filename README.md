@@ -4,7 +4,7 @@ Spring framework
 
 ## Technologies
 
-Spring Validation, Spring Security JWT-based authentication
+Spring Boot, Spring Validation, Spring Security, JWT-based authentication
 
 Hibernate Object-Relational Mapping (ORM) framework 
 
@@ -23,6 +23,8 @@ Global exception handler with `@ControllerAdvice` class
 Hash user password with Bcrypt before saving to Database
 
 JWT-based authentication with [Nimbus JOSE + JWT](https://connect2id.com/products/nimbus-jose-jwt) library
+
+Spring Security configs protected endpoints with JWT token
 
 DTO classes for:
 
