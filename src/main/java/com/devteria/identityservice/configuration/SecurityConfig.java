@@ -51,6 +51,10 @@ public class SecurityConfig {
                                                      jwtConfigurer.decoder(jwtDecoder())
                                                        .jwtAuthenticationConverter(jwtAuthenticationConverter())
                                         )
+                                          // xu ly exception khi token khong hop le
+                                          // khong the xu ly trong GlobalExceptionHandler duoc
+                                          // khong can tao @Bean inject JwtAuthenticationEntryPoint object, chi dung duy nhat mot cho
+                                          .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
     );
 
     // default spring security will turn on this csrf config
