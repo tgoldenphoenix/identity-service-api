@@ -12,16 +12,22 @@ import com.devteria.identityservice.repository.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@Slf4j
 public class UserService {
     // @Autowire is not the best-practice when doing DI
     // use constructor injection instead using @RequiredArgsConstructor
@@ -52,6 +58,19 @@ public class UserService {
         return userMapper.toUserResponse(userRepository.save(user));
     }
 
+    // lấy info based on thong tin user lưu trong token
+    // khong can truyen vao id
+    public UserResponse getMyInfo() {
+        var context = SecurityContextHolder.getContext();
+        String name = context.getAuthentication().getName();
+
+        User user = userRepository.findByUsername(name).orElseThrow(
+          () -> new AppException(ErrorCode.USER_NOT_EXISTED)
+        );
+
+        return userMapper.toUserResponse(user);
+    }
+
     public UserResponse updateUser(String userId, UserUpdateRequest request) {
         // getUser() is defined below in the same file
         User user = userRepository.findById(userId)
@@ -66,13 +85,21 @@ public class UserService {
         userRepository.deleteById(userId);
     }
 
+    // authorization base on method
+    @PreAuthorize("hasRole('ADMIN')")
     public List<UserResponse> getUsers(){
+        log.info("UserService >> getUsers()");
 //        return userRepository.findAll();
         return userRepository.findAll().stream()
                  .map(userMapper::toUserResponse).toList();
     }
 
+    // check if user tra ve co dung la user dang dang nhap (trong token) moi cho tra ve ket qua
+    // user chi co the lay thong tin cua chinh minh
+    // khong lay duoc thong tin cua cac users khác trong he thong
+    @PostAuthorize("returnObject.username == authentication.name")
     public UserResponse getUser(String id){
+        log.info("UserService >> getUser() by Id");
         return userMapper.toUserResponse(userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not founddd")));
     }
